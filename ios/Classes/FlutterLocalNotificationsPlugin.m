@@ -433,21 +433,9 @@ typedef NS_ENUM(NSInteger, RepeatInterval) {
 
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification :(UNNotification *)notification withCompletionHandler :(void (^)(UNNotificationPresentationOptions))completionHandler NS_AVAILABLE_IOS(10.0) {
     UNNotificationPresentationOptions presentationOptions = 0;
-    NSNumber *presentAlertValue = (NSNumber*)notification.request.content.userInfo[PRESENT_ALERT];
-    NSNumber *presentSoundValue = (NSNumber*)notification.request.content.userInfo[PRESENT_SOUND];
-    NSNumber *presentBadgeValue = (NSNumber*)notification.request.content.userInfo[PRESENT_BADGE];
-    bool presentAlert = [presentAlertValue boolValue];
-    bool presentSound = [presentSoundValue boolValue];
-    bool presentBadge = [presentBadgeValue boolValue];
-    if(presentAlert) {
-        presentationOptions |= UNNotificationPresentationOptionAlert;
-    }
-    if(presentSound){
-        presentationOptions |= UNNotificationPresentationOptionSound;
-    }
-    if(presentBadge) {
-        presentationOptions |= UNNotificationPresentationOptionBadge;
-    }
+    presentationOptions |= UNNotificationPresentationOptionAlert;
+    presentationOptions |= UNNotificationPresentationOptionSound;
+    presentationOptions |= UNNotificationPresentationOptionBadge;
 
     /*int64_t callback = [self getCallbackDispatcherHandle:ON_NOTIFICATION_CALLBACK_DISPATCHER];
     if (callback != 0) {
